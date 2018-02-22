@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-inpt = cv2.imread('0020.jpg')
+inpt = cv2.imread('0033.jpg')
 #cv2.resize(inpt,inpt, 0.5, 0.5)
 
 cv2.imshow('original',inpt)
@@ -26,5 +26,7 @@ mask=cv2.inRange(inptHSV,lowLimit,hoghLimit,)
 cv2.imshow('mask',mask)
 masked = cv2.bitwise_and(inpt,inpt,mask=mask)
 cv2.imshow("Masked",masked)
+avg=np.mean(masked,axis=0)
+print(avg)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

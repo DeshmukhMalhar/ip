@@ -29,6 +29,7 @@ masked = cv2.bitwise_and(inpt,inpt,mask=mask)
 cv2.imshow("Masked",masked)
 
 det = cv2.SimpleBlobDetector_create()
+
 keys = det.detect(masked)
 
 im_with_keypoints = cv2.drawKeypoints(masked, keys, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)

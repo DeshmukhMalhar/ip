@@ -1,9 +1,10 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-inpt = cv2.imread('0033.jpg')
-#cv2.resize(inpt,inpt, 0.5, 0.5)
 
+inpt = cv2.imread('0013.jpg')
+#cv2.resize(inpt,inpt, 0.5, 0.5)
+inpt=cv2.resize(inpt,(480,640),interpolation=cv2.INTER_AREA)
 cv2.imshow('original',inpt)
 blr=cv2.GaussianBlur(inpt,(49,49),0)
 cv2.imshow('Blurred',blr)
@@ -28,12 +29,21 @@ cv2.imshow('mask',mask)
 masked = cv2.bitwise_and(inpt,inpt,mask=mask)
 cv2.imshow("Masked",masked)
 
+minAvg=5
+maxAvg=140
+
+avg=np.average(mask)
+print(avg)
+
+if ((avg >minAvg)and (avg < maxAvg)):
+    print("Shuttle is detected")
+'''
 det = cv2.SimpleBlobDetector_create()
 
 keys = det.detect(masked)
 
 im_with_keypoints = cv2.drawKeypoints(masked, keys, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 cv2.imshow('keys',im_with_keypoints)
-
+'''
 cv2.waitKey(0)
 cv2.destroyAllWindows()

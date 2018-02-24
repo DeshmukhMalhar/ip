@@ -12,8 +12,7 @@ buttpin = 13
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(LedPin, GPIO.OUT)
 GPIO.setup(buttpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.add_event_detect(buttpin, GPIO.FALLING,
-                      callback=checkObject, bouncetime=300)
+
 
 
 def checkObject():
@@ -68,9 +67,13 @@ def checkObject():
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
+    GPIO.output(LedPin, GPIO.LOW)
+    GPIO.cleanup()
 
 def exit():
     cv2.destroyAllWindows()
     GPIO.output(LedPin, GPIO.LOW)
     GPIO.cleanup()
+
+GPIO.add_event_detect(buttpin, GPIO.FALLING,
+                      callback=checkObject, bouncetime=300)

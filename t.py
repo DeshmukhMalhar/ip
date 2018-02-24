@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-inpt = cv2.imread('0013.jpg')
+inpt = cv2.imread('Shuttle/0002.jpg')
 #cv2.resize(inpt,inpt, 0.5, 0.5)
 inpt=cv2.resize(inpt,(480,640),interpolation=cv2.INTER_AREA)
 cv2.imshow('original',inpt)
@@ -11,13 +11,16 @@ cv2.imshow('Blurred',blr)
 
 inptHSV=cv2.cvtColor(blr, cv2.COLOR_BGR2HSV)
 #[[[157 131 123]]]
-lowHue=150
-lowSat=100
-lowVal=40
+#[[[ 77 255  55]]]
 
-highHue=180
-highSat=150
-highVal=210
+
+lowHue=60
+lowSat=250
+lowVal=20
+
+highHue=110
+highSat=255
+highVal=150
 
 lowLimit=np.array([lowHue,lowSat,lowVal],'uint8')
 hoghLimit=np.array([highHue,highSat,highVal],'uint8')
@@ -29,8 +32,8 @@ cv2.imshow('mask',mask)
 masked = cv2.bitwise_and(inpt,inpt,mask=mask)
 cv2.imshow("Masked",masked)
 
-minAvg=5
-maxAvg=140
+minAvg=2
+maxAvg=20
 
 avg=np.average(mask)
 print(avg)

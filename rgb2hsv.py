@@ -8,9 +8,9 @@ def mapv (x,  in_min, in_max,  out_min,  out_max ):
 #15 29 186
 #xyz in BGR order
 
-x=30
-y=52
-z=0
+x=0
+y=0
+z=144
 
 a=mapv(x,0,240,0,255)
 b=mapv(y,0,240,0,255)

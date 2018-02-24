@@ -12,8 +12,6 @@ buttpin = 13
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(LedPin, GPIO.OUT)  
 GPIO.setup(buttpin, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-GPIO.add_event_detect(buttpin, GPIO.FALLING, callback=checkObject, bouncetime=300)
-def checkObject():
 
 cam=picamera.PiCamera()
 
@@ -36,7 +34,7 @@ inptHSV=cv2.cvtColor(blr, cv2.COLOR_BGR2HSV)
 
 lowHue=150
 lowSat=150
-lowVal=200
+lowVal=120
 
 highHue=250
 highSat=250
@@ -60,12 +58,14 @@ print(avg)
 
 if ((avg >minAvg)and (avg < maxAvg)):
     print("Shuttle is detected")
-    GPIO.output(LedPin, GPIO.HIGH) 
+    GPIO.output(LedPin, GPIO.HIGH)
+    time.sleep(0.5)
 else:
     print("Shuttle is not detected")
-    GPIO.output(LedPin, GPIO.LOW) 
+    GPIO.output(LedPin, GPIO.LOW)
+    time.sleep(0.5)
 
-cv2.waitKey(0)
+#cv2.waitKey(0)
 cv2.destroyAllWindows()
 GPIO.output(LedPin, GPIO.LOW) 
 GPIO.cleanup()  

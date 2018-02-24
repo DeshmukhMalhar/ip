@@ -7,14 +7,6 @@ import numpy as np
 import RPi.GPIO as GPIO
 import time
 
-LedPin = 11
-buttpin = 13
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(LedPin, GPIO.OUT)
-GPIO.setup(buttpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-
-
 def checkObject():
 
     cam = picamera.PiCamera()
@@ -75,5 +67,9 @@ def exit():
     GPIO.output(LedPin, GPIO.LOW)
     GPIO.cleanup()
 
-GPIO.add_event_detect(buttpin, GPIO.FALLING,
-                      callback=checkObject, bouncetime=300)
+LedPin = 11
+buttpin = 13
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(LedPin, GPIO.OUT)
+GPIO.setup(buttpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.add_event_detect(buttpin, GPIO.FALLING,callback=checkObject, bouncetime=300)
